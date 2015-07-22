@@ -21,4 +21,6 @@
     <color name="bottom_text_color_normal">#ffffff</color>
     <color name="btn_login_normal">#00acff</color>
     <color name="btn_login_pressed">#46678d</color>
+    <color name="btn_register_normal">#ffffff</color>
+    <color name="btn_register_pressed">#00acff</color>
 </resources>

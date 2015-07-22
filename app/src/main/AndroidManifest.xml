@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="easemob.liaoliao" >
+    package="easemob.liaoliao">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,14 +26,15 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
+        android:name=".application.LiaoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name=".application.LiaoApplication">
+        android:theme="@style/AppTheme">
+
         <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".activity.SplashActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,15 +42,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.MainActivity"> </activity>
         <activity android:name=".activity.PortalActivity"></activity>
         <activity android:name=".activity.MatchActivity"></activity>
         <activity android:name=".activity.ChatActivity"></activity>
-        <activity android:name=".activity.AlertDialogActivity"
+        <activity
+            android:name=".activity.AlertDialogActivity"
             android:theme="@style/MyDialogStyle"></activity>
-        <activity android:name=".activity.ContextMenuActivity"
+        <activity
+            android:name=".activity.ContextMenuActivity"
             android:theme="@style/MyDialogStyle"></activity>
         <activity android:name=".activity.EditActivity"></activity>
-        <activity android:name=".activity.ExitGroupDialogActivity"
+        <activity
+            android:name=".activity.ExitGroupDialogActivity"
             android:theme="@style/MyDialogStyleBottom"></activity>
         <activity android:name=".activity.ImageGridActivity"></activity>
         <activity android:name=".activity.GroupDetailsActivity"></activity>
@@ -60,6 +65,7 @@
         <activity android:name=".activity.ForwardMessageActivity"></activity>
         <activity android:name=".activity.PickContactNoCheckboxActivity"></activity>
         <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.LoginActivity"></activity>
 
         <!-- 设置环信应用的appkey -->
         <meta-data
