@@ -1,5 +1,6 @@
 package easemob.liaoliao.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -23,6 +24,7 @@ public class PortalActivity extends BaseActivity {
     private Fragment[] fragments;
     private Button btnChat;
     private Button btnSpeakingMind;
+    private Button btnSignUp;
 
     @Override
     public int getLayoutId() {
@@ -34,6 +36,7 @@ public class PortalActivity extends BaseActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         btnChat = (Button)findViewById(R.id.btn_chat);
         btnSpeakingMind = (Button)findViewById(R.id.btn_speaking_mind);
+        btnSignUp = (Button)findViewById(R.id.btn_sign_up);
     }
 
     @Override
@@ -45,6 +48,7 @@ public class PortalActivity extends BaseActivity {
         viewPager.setAdapter(adapter);
         btnChat.setOnClickListener(this);
         btnSpeakingMind.setOnClickListener(this);
+        btnSignUp.setOnClickListener(this);
     }
 
     @Override
@@ -55,6 +59,9 @@ public class PortalActivity extends BaseActivity {
                 break;
             case R.id.btn_speaking_mind:
                 viewPager.setCurrentItem(1);
+                break;
+            case R.id.btn_sign_up:
+                startActivity(new Intent(PortalActivity.this,RegisterActivity.class));
                 break;
         }
     }

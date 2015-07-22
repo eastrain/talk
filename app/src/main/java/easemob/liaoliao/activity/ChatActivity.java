@@ -292,9 +292,10 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
                         if (listView.getFirstVisiblePosition() == 0 && !isloading && haveMoreData) {
                             List<EMMessage> messages;
                             try {
-                                if (chatType == CHATTYPE_SINGLE) {
+                                if (chatType == CHATTYPE_SINGLE){
                                     messages = conversation.loadMoreMsgFromDB(adapter.getItem(0).getMsgId(), pagesize);
-                                } else {
+                                }
+                                else{
                                     messages = conversation.loadMoreGroupMsgFromDB(adapter.getItem(0).getMsgId(), pagesize);
                                 }
                             } catch (Exception e1) {
@@ -305,7 +306,7 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
                             if (messages.size() > 0) {
                                 adapter.notifyDataSetChanged();
                                 listView.setSelection(messages.size() - 1);
-                                if (messages.size() != pagesize) {
+                                if (messages.size() != pagesize){
                                     haveMoreData = false;
                                 }
                             } else {
@@ -314,7 +315,7 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
 
                             isloading = false;
 
-                        } else {
+                        }else{
                             Toast.makeText(ChatActivity.this, getResources().getString(R.string.no_more_messages), Toast.LENGTH_SHORT).show();
                         }
                         swipeRefreshLayout.setRefreshing(false);
@@ -322,9 +323,6 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
                 }, 2000);
             }
         });
-
-        setUpView();
-
     }
 
     @Override
@@ -504,11 +502,10 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
 
             @Override
             public void onError(final int error, String errorMsg) {
-                // TODO Auto-generated method stub
                 EMLog.d(TAG, "join room failure : " + error);
-                runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable(){
                     @Override
-                    public void run() {
+                    public void run(){
                         pd.dismiss();
                     }
                 });
@@ -542,10 +539,10 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
                     break;
 
                 case RESULT_CODE_FORWARD: // 转发消息
-//                    EMMessage forwardMsg = (EMMessage) adapter.getItem(data.getIntExtra("position", 0));
-//                    Intent intent = new Intent(this, ForwardMessageActivity.class);
-//                    intent.putExtra("forward_msg_id", forwardMsg.getMsgId());
-//                    startActivity(intent);
+                    EMMessage forwardMsg = (EMMessage) adapter.getItem(data.getIntExtra("position", 0));
+                    Intent intent = new Intent(this, ForwardMessageActivity.class);
+                    intent.putExtra("forward_msg_id", forwardMsg.getMsgId());
+                    startActivity(intent);
 
                     break;
 
@@ -624,7 +621,7 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
                     sendLocationMsg(latitude, longitude, "", locationAddress);
                 } else {
                     String st = getResources().getString(R.string.unable_to_get_loaction);
-                    Toast.makeText(this, st, 0).show();
+                    Toast.makeText(this, st, Toast.LENGTH_SHORT).show();
                 }
                 // 重发消息
             } else if (requestCode == REQUEST_CODE_TEXT || requestCode == REQUEST_CODE_VOICE
@@ -848,7 +845,6 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
      * 发送文本消息
      *
      * @param content  message content
-     * @param isResend boolean resend
      */
     private void sendText(String content) {
 
@@ -1060,12 +1056,12 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
         File file = new File(filePath);
         if (file == null || !file.exists()) {
             String st7 = getResources().getString(R.string.File_does_not_exist);
-            Toast.makeText(getApplicationContext(), st7, 0).show();
+            Toast.makeText(getApplicationContext(), st7, Toast.LENGTH_SHORT).show();
             return;
         }
         if (file.length() > 10 * 1024 * 1024) {
             String st6 = getResources().getString(R.string.The_file_is_not_greater_than_10_m);
-            Toast.makeText(getApplicationContext(), st6, 0).show();
+            Toast.makeText(getApplicationContext(), st6, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -1641,7 +1637,7 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
 
                 public void run() {
                     if (toChatUsername.equals(groupId)) {
-                        Toast.makeText(ChatActivity.this, st13, 1).show();
+                        Toast.makeText(ChatActivity.this, st13, Toast.LENGTH_SHORT).show();
                         if (GroupDetailsActivity.instance != null)
                             GroupDetailsActivity.instance.finish();
                         finish();
@@ -1658,7 +1654,7 @@ public class ChatActivity extends BaseActivity implements EMEventListener{
 
                 public void run() {
                     if (toChatUsername.equals(groupId)) {
-                        Toast.makeText(ChatActivity.this, st14, 1).show();
+                        Toast.makeText(ChatActivity.this, st14, Toast.LENGTH_SHORT).show();
                         if (GroupDetailsActivity.instance != null)
                             GroupDetailsActivity.instance.finish();
                         finish();
