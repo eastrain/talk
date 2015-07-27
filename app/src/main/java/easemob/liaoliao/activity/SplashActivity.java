@@ -1,105 +1,52 @@
 package easemob.liaoliao.activity;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Button;
 
-import com.easemob.chat.EMChatManager;
-import com.easemob.chat.EMGroupManager;
-
-import easemob.liaoliao.HXSDKHelper;
 import easemob.liaoliao.R;
 
 /**
  * 开屏页
- *
  */
 public class SplashActivity extends BaseActivity {
-	private RelativeLayout rootLayout;
-	private TextView versionText;
-	
-	private static final int sleepTime = 2000;
+    private Button btnTouristsLanding;
+    private Button btnSignUp;
+    private Button btnSignIn;
 
-	@Override
-	public int getLayoutId() {
-		return R.layout.activity_splash;
-	}
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_splash;
+    }
 
-	@Override
-	public void initViewId() {
-		rootLayout = (RelativeLayout) findViewById(R.id.splash_root);
-		versionText = (TextView) findViewById(R.id.tv_version);
-	}
+    @Override
+    public void initViewId() {
+        btnTouristsLanding = (Button) findViewById(R.id.btn_tourists_landing);
+        btnSignUp = (Button) findViewById(R.id.btn_sign_up);
+        btnSignIn = (Button) findViewById(R.id.btn_sign_in);
+    }
 
-	@Override
-	public void setUpView() {
-		versionText.setText(getVersion());
-		AlphaAnimation animation = new AlphaAnimation(0.3f, 1.0f);
-		animation.setDuration(1500);
-		rootLayout.startAnimation(animation);
-	}
+    @Override
+    public void setUpView() {
+        btnTouristsLanding.setOnClickListener(this);
+        btnSignUp.setOnClickListener(this);
+        btnSignIn.setOnClickListener(this);
+    }
 
-	@Override
-	protected void onStart() {
-		super.onStart();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_tourists_landing:
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                break;
 
-		new Thread(new Runnable() {
-			public void run() {
-				if (HXSDKHelper.getInstance().isLogined()) {
-					// ** 免登陆情况 加载所有本地群和会话
-					//不是必须的，不加sdk也会自动异步去加载(不会重复加载)；
-					//加上的话保证进了主页面会话和群组都已经load完毕
-					long start = System.currentTimeMillis();
-					EMGroupManager.getInstance().loadAllGroups();
-					EMChatManager.getInstance().loadAllConversations();
-					long costTime = System.currentTimeMillis() - start;
-					//等待sleeptime时长
-					if (sleepTime - costTime > 0) {
-						try {
-							Thread.sleep(sleepTime - costTime);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					//进入主页面
-					startActivity(new Intent(SplashActivity.this, MainActivity.class));
-					finish();
-				}else {
-					try {
-						Thread.sleep(sleepTime);
-					} catch (InterruptedException e) {
-					}
-					startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-					finish();
-				}
-			}
-		}).start();
+            case R.id.btn_sign_up:
+                startActivity(new Intent(SplashActivity.this, RegisterActivity.class));
+                break;
 
-	}
-	
-	/**
-	 * 获取当前应用程序的版本号
-	 */
-	private String getVersion() {
-		String st = getResources().getString(R.string.Version_number_is_wrong);
-		PackageManager pm = getPackageManager();
-		try {
-			PackageInfo packinfo = pm.getPackageInfo(getPackageName(), 0);
-			String version = packinfo.versionName;
-			return version;
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-			return st;
-		}
-	}
-
-	@Override
-	public void onClick(View v) {
-
-	}
+            case R.id.btn_sign_in:
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                break;
+        }
+    }
 }

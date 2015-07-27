@@ -22,11 +22,9 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -45,7 +43,6 @@ import easemob.liaoliao.utils.CommonUtils;
 
 /**
  * 登陆页面
- *
  */
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
@@ -66,6 +63,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initViewId() {
+        usernameEditText = (EditText) findViewById(R.id.username);
         // 如果用户名密码都有，直接进入主页面
         if (HXSDKHelper.getInstance().isLogined()) {
             autoLogin = true;
@@ -73,7 +71,6 @@ public class LoginActivity extends BaseActivity {
 
             return;
         }
-        usernameEditText = (EditText) findViewById(R.id.username);
         passwordEditText = (EditText) findViewById(R.id.password);
     }
 
